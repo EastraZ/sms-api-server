@@ -1,6 +1,9 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
+// WŁĄCZ CORS - pozwala na połączenia z VoiceFlow
+app.use(cors());
 app.use(express.json());
 
 // Endpoint do wysyłki SMS
@@ -12,6 +15,7 @@ app.post('/send-sms', async (req, res) => {
     console.log('Firma:', firma);
     console.log('Numery:', telefony);
     console.log('Wiadomość:', wiadomosc);
+    console.log('========================');
     
     // NA RAZIE TYLKO LOGUJEMY - potem dodamy Twilio
     res.json({ 
@@ -21,13 +25,14 @@ app.post('/send-sms', async (req, res) => {
     });
     
   } catch (error) {
+    console.error('BŁĄD:', error);
     res.json({ status: "error", message: error.message });
   }
 });
 
 // Health check
 app.get('/', (req, res) => {
-  res.send('SMS API Server działa!');
+  res.send('SMS API Server działa z CORS!');
 });
 
 const PORT = process.env.PORT || 3000;
