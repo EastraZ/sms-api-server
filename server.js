@@ -12,7 +12,6 @@ app.post('/send-sms', async (req, res) => {
     console.log('Firma:', firma);
     console.log('Numery:', telefony);
     console.log('Wiadomość:', wiadomosc);
-    console.log('========================');
     
     // NA RAZIE TYLKO LOGUJEMY - potem dodamy Twilio
     res.json({ 
